@@ -1,9 +1,11 @@
 
-
-function TranslationView() {
+function TranslationList(props) {
+  
+  const {line} = props
+  
   return (
-    <div></div>
+    <div>{line}</div>
   );
 }
 
-export default TranslationView;
+export default TranslationList;
