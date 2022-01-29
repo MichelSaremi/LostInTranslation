@@ -49,9 +49,9 @@ let enteredText = "";
 function TranslationView() {
   
   const navigator = useNavigate()
+  const props = useParams()
   
   //---Get user id from username
-  const props = useParams()
   const [ userId, setUserID ] = useState("");
   console.log("name "+props.username)
   const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
