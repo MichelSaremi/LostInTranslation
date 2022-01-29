@@ -1,6 +1,5 @@
 import App from "../App";
-import { useParams } from "react-router-dom";
-
+import { useParams, useNavigate } from "react-router-dom";
 import './TranslationView.css';
 import { useState } from 'react';
 
@@ -48,6 +47,8 @@ const storeTranslation = (userId, newTranslation) => {
 let enteredText = "";
 
 function TranslationView() {
+  
+  const navigator = useNavigate()
   
   //---Get user id from username
   const props = useParams()
@@ -103,11 +104,18 @@ function TranslationView() {
     }
   )
 
+  const GoToProfile=()=>{
+    navigator(`/profile/${props.username}`) 
+  }
+
   return (
    <>
     <div>
       <input type="text" onChange={onTextChanged} />
       <button onClick={OnTranslateClicked} type="button">Translate</button>
+    </div>
+    <div>
+      <button onClick={GoToProfile} type="button">Go to profile page</button>
     </div>
     <div className="TranslatedText">
      { translated }
