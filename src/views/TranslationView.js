@@ -4,7 +4,6 @@ import { useParams } from "react-router-dom";
 import './TranslationView.css';
 import { useState } from 'react';
 
-const props = useParams()
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -49,7 +48,22 @@ const storeTranslation = (userId, newTranslation) => {
 let enteredText = "";
 
 function TranslationView() {
-
+  
+  //---Get user id from username
+  const props = useParams()
+  const [ userId, setUserID ] = useState("");
+  console.log("name "+props.username)
+  const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
+  fetch(`${apiURL}translations?username=${props.username}`)
+    .then(response => response.json())
+    .then(results => {
+       console.log("results "+results[0].id)
+       setUserID(results[0].id)
+    })
+    .catch(error => {
+    })
+  
+  
   const [ text2Translate, setText2Translate ] = useState("");
 
   /* function to store the entered text in variable "text2Translate" */
@@ -70,7 +84,7 @@ function TranslationView() {
     console.log("Translate was clicked");
     console.log("enteredText", enteredText);
     setText2Translate(enteredText);
-    storeTranslation(1, enteredText);
+    storeTranslation(userId, enteredText);
   }
 
   const translated = text2Translate.split("").map(
