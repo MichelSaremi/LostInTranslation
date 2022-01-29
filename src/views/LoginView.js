@@ -4,7 +4,7 @@ import React from "react";
 
 function LoginView() {
   const [username, setUsername] = useState();
-  const navigatator = useNavigate()
+  const navigator = useNavigate()
   const input = createRef()
 
   //--- When button is clicked
@@ -59,7 +59,7 @@ function LoginView() {
         })
         
         //--Take user to translation view
-        navigatator(`/translation`)
+        navigator(`/translation/${username}`)
         
 
 

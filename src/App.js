@@ -11,9 +11,10 @@ function App() {
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<LoginView />}/>
-        <Route path="/translation" element={<TranslationView/>}/>
-        <Route path="/profile" element={<ProfileView/>}/>
-        {/* <Route path='*' element={<NotFound/>}/> */}
+        <Route path="/translation/:username" element={<TranslationView/>}/>
+        <Route path="/profile/:username" element={<ProfileView/>}/>
+        <Route path='*' element={<NotFound/>}/>
+
       </Routes>
     </BrowserRouter>
   </div>

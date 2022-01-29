@@ -1,6 +1,10 @@
+import App from "../App";
+import { useParams } from "react-router-dom";
+
 import './TranslationView.css';
 import { useState } from 'react';
 
+const props = useParams()
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
@@ -95,6 +99,7 @@ function TranslationView() {
      { translated }
     </div>
    </> 
+
   );
 }
 
