@@ -2,6 +2,7 @@ import './App.css';
 import LoginView from "./views/LoginView";
 import TranslationView from "./views/TranslationView";
 import ProfileView from "./views/ProfileView";
+import NotFound from './views/NotFound';
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 
 function App() {
