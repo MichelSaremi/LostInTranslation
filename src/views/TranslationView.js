@@ -16,7 +16,7 @@ const onTextChanged = (event) => {
 /* function when the user clicked on the "Translate* button */
 const OnTranslateClicked = (event) => {
   console.log("Translate was clicked");
-  const imgArray = [];
+  const elementArray = [];
   /* iterate through each character of entered text */
   for (const char of text2Translate.split("")) {
     /* if current character is a letter of the alphabet */
@@ -26,16 +26,28 @@ const OnTranslateClicked = (event) => {
         src: `${imgPath}${char.toLowerCase()}.png`,
         //class: "TranslatedText",
         style: { width: "50px" },
-        key: imgArray.length
+        key: elementArray.length
         }, null);  
-      imgArray.push(img);
+      elementArray.push(img);
+    }
+    else if (char == " ") {
+      const whitespace = createElement("label", { 
+        key: elementArray.length, 
+        style: { 
+          width: "20px",
+          display: "inline-block"
+        }
+      }, null );  
+      elementArray.push(whitespace);
     }
   }
   ReactDOM.render(
-    imgArray, 
+    elementArray, 
     document.getElementById("divTranslatedText")
   )
 }
+
+
 
 function TranslationView() {
   return (
@@ -47,6 +59,7 @@ function TranslationView() {
     <div id="divTranslatedText" className="TranslatedText">
 
     </div>
+    <label>&nbsp;</label>
    </> 
   );
 }
