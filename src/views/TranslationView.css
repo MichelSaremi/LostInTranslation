@@ -1,0 +1,7 @@
+div.TranslatedText {
+    border-style: dashed;
+    border-width: 2px;
+    width: 400px;
+    height: 400px;
+    float: left;
+}
