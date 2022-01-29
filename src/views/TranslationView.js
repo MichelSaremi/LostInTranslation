@@ -1,8 +1,9 @@
+import App from "../App";
 
+function TranslationView (props) {
 
-function TranslationView() {
   return (
-   <div></div> 
+   <div>Hello from translation view</div> 
   );
 }
 
