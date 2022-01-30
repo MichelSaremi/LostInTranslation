@@ -56,14 +56,20 @@ function ProfileView() {
       console.log("list "+translationlist)
       console.log("list single "+translationlist[0])
       console.log(props.userId)
-     
- 
+      
+      //---only take the 10 latest translations
+      const ListOf10 = [];
+      for (let i=translationlist.length; i>translationlist.length-11; i--){
+        if (translationlist[i]!=null){
+        ListOf10.push(translationlist[i])
+      }}
+      
       //---split translations into seperate lines and list them one at a time
-      const lines = translationlist.map((line, index) => {
+      const lines = ListOf10.map((line, index) => {
         
         return (
-          <div key={index}>
-            <TranslationList  line={line} />
+          <div key={index+1}>
+            <TranslationList index={index+1} line={line} />
           </div>
         )
       });
