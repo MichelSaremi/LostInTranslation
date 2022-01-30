@@ -4,13 +4,11 @@ import { useState , useEffect} from 'react';
 
 
 //---Delete your translations from API
-function DeleteTranslations(){
-
-    const props = useParams()
-
+function DeleteTranslations(userId){
+  return () => {
     let url = "https://ms-oh-trivia-api.herokuapp.com/";
     const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
-    url += `translations/${props.userId}`;
+    url += `translations/${userId}`;
   
     fetch(url, {
       method: 'PATCH', // NB: Set method to PATCH
@@ -36,6 +34,7 @@ function DeleteTranslations(){
     })
     .catch(error => {
     })
+  }
 }
 
 function ProfileView() {
@@ -74,7 +73,7 @@ function ProfileView() {
           <h1>The most recent translations you have done!</h1>
           {lines}
           {props.userId}
-          <button onClick={DeleteTranslations} type="button">Delete your translations</button>
+          <button onClick={DeleteTranslations(props.userId)} type="button">Delete your translations</button>
         </div>
       );
 };
