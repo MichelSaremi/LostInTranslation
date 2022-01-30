@@ -1,10 +1,10 @@
 
 function TranslationList(props) {
   
-  const {line} = props
+  const {index,line} = props
   
   return (
-    <div>{line}</div>
+    <div>{index+"."} - {line}</div>
   );
 }
 
