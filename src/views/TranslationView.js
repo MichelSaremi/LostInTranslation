@@ -86,6 +86,7 @@ function TranslationView() {
     console.log("enteredText", enteredText);
     setText2Translate(enteredText);
     storeTranslation(userId, enteredText);
+    document.getElementById('text').value = "";
   }
 
   const translated = text2Translate.split("").map(
@@ -111,7 +112,7 @@ function TranslationView() {
   return (
    <>
     <div>
-      <input type="text" onChange={onTextChanged} />
+      <input type="text" id="text" onChange={onTextChanged} />
       <button onClick={OnTranslateClicked} type="button">Translate</button>
     </div>
     <div>
