@@ -73,7 +73,7 @@ function ProfileView() {
           <h1>The most recent translations you have done!</h1>
           {lines}
           {props.userId}
-          <button onClick={DeleteTranslations(props.userId)} type="button">Delete your translations</button>
+          <button onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
         </div>
       );
 };
