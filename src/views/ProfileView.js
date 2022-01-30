@@ -1,11 +1,11 @@
 import TranslationList from "../components/TranslationList";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from 'react';
-
+import { useNavigate } from "react-router-dom";
 
 //---Delete your translations from API
 function DeleteTranslations(userId){
-  return () => {
+
     let url = "https://ms-oh-trivia-api.herokuapp.com/";
     const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
     url += `translations/${userId}`;
@@ -17,15 +17,14 @@ function DeleteTranslations(userId){
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-        // Provide new translations to add to user with userId
-        translations: []
+          // Provide new translations to add to user with userId
+          translations: [] 
       })
     })
     .then(response => {
-    
-    if (!response.ok) {
-      throw new Error("Could not update translations history");
-    }
+      if (!response.ok) {
+        throw new Error("Could not update translations history");
+      }
       return response.json();
     })
     .then(updatedUser => {
@@ -34,13 +33,13 @@ function DeleteTranslations(userId){
     })
     .catch(error => {
     })
-  }
 }
 
 function ProfileView() {
       //---Get user translations from username 
       const [translationlist, setTranslations ] = useState([]);
       const props = useParams()
+      const navigator = useNavigate()
 
       useEffect(() => {
         const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
@@ -75,6 +74,7 @@ function ProfileView() {
           <h1>The most recent translations you have done!</h1>
           {lines}
           <button onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
+          <button onClick={() => {DeleteTranslations(props.userId);setTranslations([]);navigator(`/`)}} type="button">Logout</button>
         </div>
       );
 };
