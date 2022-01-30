@@ -74,6 +74,10 @@ function LoginView() {
 
     <div className="textButton">
         <h1 className="greeting">Welcome to the text to sign language translator</h1>
+        <div className='info'>
+            <h3>Type in a phrase you wish to translate into sign language.</h3>
+            <h3>To start type in your name and register</h3>
+        </div>
         <form onSubmit={onSubmit}>
             <input ref={input} placeholder="What is your name?" />
             <button className='button' type="submit" >Register</button>
