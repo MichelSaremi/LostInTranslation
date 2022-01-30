@@ -46,11 +46,9 @@ function LoginView() {
                     }
                     return response.json()
                 })
-                .then(newUser => {
-                // newUser is the new user with an id
-                })
                 .catch(error => {
                 })
+            //---set username
             setUsername(username)
             }   
         // results will be an array of users that match the username of victor.
