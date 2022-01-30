@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route path="/" element={<LoginView />}/>
         <Route path="/translation/:username" element={<TranslationView/>}/>
-        <Route path="/profile/:username" element={<ProfileView/>}/>
+        <Route path="/profile/:username/:userId" element={<ProfileView/>}/>
         <Route path='*' element={<NotFound/>}/>
 
       </Routes>

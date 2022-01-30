@@ -105,7 +105,7 @@ function TranslationView() {
   )
 
   const GoToProfile=()=>{
-    navigator(`/profile/${props.username}`) 
+    navigator(`/profile/${props.username}/${userId}`) 
   }
 
   return (
