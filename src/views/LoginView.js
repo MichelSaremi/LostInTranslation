@@ -1,3 +1,4 @@
+import './LoginView.css';
 import { useNavigate } from "react-router-dom";
 import { createRef, useState } from "react";
 import React from "react";
@@ -64,13 +65,26 @@ function LoginView() {
 
   }
   return (
-    <div>
-        <h1>Hello and welcome to the translator</h1>
-    <form onSubmit={onSubmit}>
-        <input ref={input} placeholder="What is your name?" />
-        <button type="submit" >Register</button>
-    </form>
+    <>
+    <div className="main">
+
+    <div className="header">
+        <h1>Lost in translation</h1>
     </div>
+
+    <div className="textButton">
+        <h1 className="greeting">Welcome to the text to sign language translator</h1>
+        <form onSubmit={onSubmit}>
+            <input ref={input} placeholder="What is your name?" />
+            <button className='button' type="submit" >Register</button>
+        </form>
+    </div>
+    <div className="footer">
+        <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
+    </div>
+
+    </div>
+    </>
   );
 }
 
