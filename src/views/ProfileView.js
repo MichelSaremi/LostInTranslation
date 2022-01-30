@@ -47,15 +47,11 @@ function ProfileView() {
         fetch(`${apiURL}translations?username=${props.username}`)
         .then(response => response.json())
         .then(results => {
-           console.log("results "+results[0].translations)
           setTranslations(results[0].translations)
         })
         .catch(error => {
         })
       }, [])
-      console.log("list "+translationlist)
-      console.log("list single "+translationlist[0])
-      console.log(props.userId)
       
       //---only take the 10 latest translations
       const ListOf10 = [];
@@ -78,7 +74,6 @@ function ProfileView() {
         <div>
           <h1>The most recent translations you have done!</h1>
           {lines}
-          {props.userId}
           <button onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
         </div>
       );
