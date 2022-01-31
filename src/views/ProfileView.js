@@ -1,7 +1,7 @@
 import TranslationList from "../components/TranslationList";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from 'react';
-
+import CheckUser from "../components/CheckUser";
 
 //---Delete your translations from API
 function DeleteTranslations(userId){
@@ -78,4 +78,4 @@ function ProfileView() {
       );
 };
 
-export default ProfileView;
+export default CheckUser(ProfileView);
