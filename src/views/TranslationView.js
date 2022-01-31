@@ -1,7 +1,7 @@
-import App from "../App";
 import { useParams, useNavigate } from "react-router-dom";
 import './TranslationView.css';
 import { useState } from 'react';
+import CheckUser from "../components/CheckUser";
 
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
@@ -46,16 +46,18 @@ const storeTranslation = (userId, newTranslation) => {
 
 let enteredText = "";
 
-function TranslationView() {
+function TranslationView(props) {
   
   const navigator = useNavigate()
-  const props = useParams()
-  
+  const params = useParams();
+  const { username } = props;
+  console.log("userName:", username);
+
   //---Get user id from username
   const [ userId, setUserID ] = useState("");
-  console.log("name "+props.username)
+  console.log("name " + params.username)
   const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
-  fetch(`${apiURL}translations?username=${props.username}`)
+  fetch(`${apiURL}translations?username=${params.username}`)
     .then(response => response.json())
     .then(results => {
        console.log("results "+results[0].id)
@@ -106,7 +108,7 @@ function TranslationView() {
   )
 
   const GoToProfile=()=>{
-    navigator(`/profile/${props.username}/${userId}`) 
+    navigator(`/profile/${params.username}/${userId}`) 
   }
 
   return (
@@ -126,4 +128,4 @@ function TranslationView() {
   );
 }
 
-export default TranslationView;
+export default CheckUser(TranslationView);
