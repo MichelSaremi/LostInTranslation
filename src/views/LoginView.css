@@ -1,5 +1,5 @@
 div.main {
-    background: yellow url(C:/Users/Mina/Desktop/Lost-In-Translation/public/assets/Logo-Hello.png) center;
+    background: yellow url("../Logo-Hello.png") center;
     position: fixed; 
     top: 0; 
     left: 0; 
