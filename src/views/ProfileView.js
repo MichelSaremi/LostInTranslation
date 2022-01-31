@@ -1,3 +1,4 @@
+import './ProfileView.css';
 import TranslationList from "../components/TranslationList";
 import { useParams } from "react-router-dom";
 import { useState , useEffect} from 'react';
@@ -71,11 +72,19 @@ function ProfileView() {
       });
 
       return (
-        <div>
+        <div className='main'>
+        <div className='header'>
           <h1>The most recent translations you have done!</h1>
+        </div>
+        <div className='lines'>
           {lines}
-          <button onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
-          <button onClick={() => {DeleteTranslations(props.userId);setTranslations([]);navigator(`/`)}} type="button">Logout</button>
+        </div>
+          <button className='delete' onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
+          <button className ='logout' onClick={() => {DeleteTranslations(props.userId);setTranslations([]);navigator(`/`)}} type="button">Logout</button>
+        
+        <div className="footer">
+          <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
+        </div>
         </div>
       );
 };

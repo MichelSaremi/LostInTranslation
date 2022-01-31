@@ -114,15 +114,27 @@ function TranslationView(props) {
 
   return (
    <>
-    <div>
+    <div className="main">
+    <div className="header">
+        <h1>Lost in translation</h1>
+        <h3>Page for {params.username}</h3>
+    </div>
+
+    <button className="profile" onClick={GoToProfile} type="button">Go to profile page</button>
+    
+    <div className="textButton">
       <input type="text" id="text" onChange={onTextChanged} />
-      <button onClick={OnTranslateClicked} type="button">Translate</button>
+      <button className="translate" onClick={OnTranslateClicked} type="button">Translate</button>
     </div>
-    <div>
-      <button onClick={GoToProfile} type="button">Go to profile page</button>
-    </div>
+    
     <div className="TranslatedText">
      { translated }
+    </div>
+
+    <div className="footer">
+        <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
+    </div>
+
     </div>
    </> 
 
