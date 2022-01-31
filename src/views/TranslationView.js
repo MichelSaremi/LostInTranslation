@@ -6,12 +6,11 @@ import CheckUser from "../components/CheckUser";
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-/* start test data */
-const translationHistory = [];
-/* end test data */
-
 const storeTranslation = (userId, newTranslation) => {
+  const translationHistory = localStorage.getItem("translations").split(String.fromCharCode(30));
+  console.log("translationHistory:",typeof(translationHistory));
   translationHistory.push(newTranslation);
+  localStorage.setItem("translations",translationHistory.join(String.fromCharCode(30)));
   let url = "https://ms-oh-trivia-api.herokuapp.com/";
   const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
   url += `translations/${userId}`;
@@ -86,8 +85,10 @@ function TranslationView(props) {
   const OnTranslateClicked = (event) => {
     console.log("Translate was clicked");
     console.log("enteredText", enteredText);
-    setText2Translate(enteredText);
-    storeTranslation(userId, enteredText);
+    if(enteredText != "") {
+      setText2Translate(enteredText);
+      storeTranslation(userId, enteredText);
+    }
     document.getElementById('text').value = "";
   }
 

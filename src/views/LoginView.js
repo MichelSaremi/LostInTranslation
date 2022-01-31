@@ -25,27 +25,34 @@ function LoginView() {
                 //---if user exists
                 if (!(Object.keys(results).length===0)){
                     alert("Welcome back "+ username)
-                    //---if not create a new profile
+                    //--- get latest translation for this user
+                    const translations = results[0].translations;
+                    console.log("translations:", translations);
+                    localStorage.setItem("translations", translations.join(String.fromCharCode(30)));
+                    localStorage.setItem("userId", results[0].id);
                 }
-                fetch(`${apiURL}translations`, {
-                    method: 'POST',
-                    headers: {
-                    'X-API-Key': apiKey,
-                    'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({ 
-                    username: username, 
-                    translations: [] 
+                else {
+                    //---if not create a new profile
+                    fetch(`${apiURL}translations`, {
+                        method: 'POST',
+                        headers: {
+                        'X-API-Key': apiKey,
+                        'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({ 
+                        username: username, 
+                        translations: [] 
+                        })
                     })
-                })
-                .then(response => {
-                if (!response.ok) {
-                    throw new Error('Could not create new user')
-                    }
-                    return response.json()
-                })
-                .catch(error => {
-                })
+                    .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Could not create new user')
+                        }
+                        return response.json()
+                    })
+                    .catch(error => {
+                    })
+                }
                 console.log("username:", username);
                 console.log("localStorage.getItem(userName): ", localStorage.getItem("userName"));
             // results will be an array of users that match the username of victor.
