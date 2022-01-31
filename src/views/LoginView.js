@@ -3,7 +3,6 @@ import { createRef, useState } from "react";
 import React from "react";
 
 function LoginView() {
-    const [username, setUsername] = useState();
     const navigator = useNavigate()
     const input = createRef()
 
@@ -12,7 +11,7 @@ function LoginView() {
         const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
         const apiKey = 'hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge'
         event.preventDefault()
-        const username=input.current.value
+        const username = input.current.value
         //--- check if string is empty
         if (username==''){
             alert("Write your name")
@@ -49,18 +48,19 @@ function LoginView() {
                 })
                 .catch(error => {
                 })
-                setUsername(username)
-                localStorage.setItem("userName", username);
-        // results will be an array of users that match the username of victor.
+                console.log("username:", username);
+                console.log("localStorage.getItem(userName): ", localStorage.getItem("userName"));
+            // results will be an array of users that match the username of victor.
             })
             .catch(error => {
             })
         
-
         //--Take user to translation view
+        console.log("navigating to translation page for user: ", username);
+        localStorage.setItem("userName", username);
         navigator(`/translation/${username}`)
+        }
     }
-  }
   return (
     <div>
         <h1>Hello and welcome to the translator</h1>

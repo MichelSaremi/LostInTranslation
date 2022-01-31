@@ -1,3 +1,4 @@
+import { BrowserRouter, NavLink } from "react-router-dom";
 import LoginView from "../views/LoginView";
 
 function CheckUser(TargetComponent) {
@@ -13,7 +14,10 @@ function CheckUser(TargetComponent) {
             }
             else {
                 return (
-                    <LoginView />
+                    <div>
+                        You are not logged in...<br />
+                        <NavLink to="/">Go to Login</NavLink>
+                    </div>
                 )
             }
         }
