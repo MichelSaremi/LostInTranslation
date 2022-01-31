@@ -17,11 +17,10 @@ div.header {
     text-align: center;
     color:white;
 }
-
 div.textButton {
     background: white;
-    width: 750px;
-    margin: 250px auto auto auto;
+    width: 800px;
+    margin: 300px auto auto auto;
     opacity: 0.8;
     text-align: center;
 
@@ -35,9 +34,7 @@ div.info{
     font-family: sans-serif;
     font-style: italic;
     color:rebeccapurple;
-
 }
-
 button.button {
     background: rebeccapurple;
     color:seashell;
