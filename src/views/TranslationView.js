@@ -6,8 +6,6 @@ import CheckUser from "../components/CheckUser";
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
-const translationHistory=[]
-
 /* this function stores the text entered by the user to the JSON DB
   --- gets translationHistory from localStorage
   --- appends the latest user input to that array
@@ -15,7 +13,14 @@ const translationHistory=[]
   --- uses the new array for the API call to store the entire array
 */
 const storeTranslation = (userId, newTranslation) => {
-  const translationHistory = JSON.parse(localStorage.getItem("translations"));
+  const translationHistoryValue = localStorage.getItem("translations");
+  let translationHistory = [];
+  if(
+    translationHistoryValue != undefined && 
+    translationHistoryValue != null &&
+    translationHistoryValue != "") {
+      translationHistory = JSON.parse(localStorage.getItem("translations"));
+  }
   translationHistory.push(newTranslation);
   localStorage.setItem("translations",JSON.stringify(translationHistory));
   let url = "https://ms-oh-trivia-api.herokuapp.com/";
@@ -58,7 +63,7 @@ function TranslationView() {
   const props = useParams();
   const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'  
   
-  
+
   const [ text2Translate, setText2Translate ] = useState("");
 
   /* function to store the entered text in variable "text2Translate" */
