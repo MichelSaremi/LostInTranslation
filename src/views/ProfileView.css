@@ -43,12 +43,27 @@ button.logout {
     color:seashell;
     border-radius: 10%;
     width: 100px;
+    height: 40px;
+    text-align: center;
+    position: relative;
+    left: 38%;
+    opacity: 0.9;
+}
+button.trans {
+    background: rebeccapurple;
+    color:seashell;
+    border-radius: 10%;
+    width: 120px;
     height: 50px;
     text-align: center;
     position: relative;
-    left: 50%;
+    left: 15%;
     opacity: 0.9;
 }
+div.buttons{
+    position: relative;
+    left: 10%;
+} 
 div.footer {
     position:absolute;
     bottom:0;
