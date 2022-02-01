@@ -1,6 +1,6 @@
 # Lost in Translation
 "Lost in Translations" is an online sign language translator built as a Single Page Application using the React library.
-The application will has one main feature: to act as a “translator” from regular text to sign language.
+The application has one main feature: to act as a “translator” from regular text to sign language.
 
 # Install
 
