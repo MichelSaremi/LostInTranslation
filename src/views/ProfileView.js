@@ -125,9 +125,9 @@ function ProfileView() {
             {lines}
           </div>
           <div className='buttons'>
+            <button className='trans' onClick={ handleBackClick } type="button">Back to translation page</button>
             <button className='delete' onClick={ handleDeleteClick } type="button">Delete your translations</button>
             <button className ='logout' onClick={ handleLogOutClick } type="button">Logout</button>
-            <button className='trans' onClick={ handleBackClick } type="button">Back to translation page</button>
           </div>
           <div className="footer">
             <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
