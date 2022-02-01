@@ -8,11 +8,16 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
 const translationHistory=[]
 
+/* this function stores the text entered by the user to the JSON DB
+  --- gets translationHistory from localStorage
+  --- appends the latest user input to that array
+  --- writes the new translationHistory back to local storage
+  --- uses the new array for the API call to store the entire array
+*/
 const storeTranslation = (userId, newTranslation) => {
-  // const translationHistory = localStorage.getItem("translations").split(String.fromCharCode(30));
-  // console.log("translationHistory:",typeof(translationHistory));
+  const translationHistory = JSON.parse(localStorage.getItem("translations"));
   translationHistory.push(newTranslation);
-  // localStorage.setItem("translations",translationHistory.join(String.fromCharCode(30)));
+  localStorage.setItem("translations",JSON.stringify(translationHistory));
   let url = "https://ms-oh-trivia-api.herokuapp.com/";
   const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
   url += `translations/${userId}`;
@@ -51,22 +56,7 @@ function TranslationView() {
   
   const navigator = useNavigate()
   const props = useParams();
-  //const { username } = params;
-  console.log("userName:", props.username);
-  console.log("userid: "+props.userId);
-  //---Get user id from username
-  //const [ userId, setUserID ] = useState("");
-  // setUserID(params.userId)
-  console.log("name " + props.username)
-  const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
-  fetch(`${apiURL}translations?username=${props.username}`)
-    .then(response => response.json())
-    .then(results => {
-       console.log("results "+results[0].id)
-       //setUserID(results[0].id)
-    })
-    .catch(error => {
-    })
+  const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'  
   
   
   const [ text2Translate, setText2Translate ] = useState("");
