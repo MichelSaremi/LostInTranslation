@@ -6,11 +6,13 @@ import CheckUser from "../components/CheckUser";
 const imgPath = `${process.env.PUBLIC_URL}/assets/signs/`;
 const alphabet = "abcdefghijklmnopqrstuvwxyz"
 
+const translationHistory=[]
+
 const storeTranslation = (userId, newTranslation) => {
-  const translationHistory = localStorage.getItem("translations").split(String.fromCharCode(30));
-  console.log("translationHistory:",typeof(translationHistory));
+  // const translationHistory = localStorage.getItem("translations").split(String.fromCharCode(30));
+  // console.log("translationHistory:",typeof(translationHistory));
   translationHistory.push(newTranslation);
-  localStorage.setItem("translations",translationHistory.join(String.fromCharCode(30)));
+  // localStorage.setItem("translations",translationHistory.join(String.fromCharCode(30)));
   let url = "https://ms-oh-trivia-api.herokuapp.com/";
   const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
   url += `translations/${userId}`;
@@ -45,22 +47,23 @@ const storeTranslation = (userId, newTranslation) => {
 
 let enteredText = "";
 
-function TranslationView(props) {
+function TranslationView() {
   
   const navigator = useNavigate()
-  const params = useParams();
-  const { username } = props;
-  console.log("userName:", username);
-
+  const props = useParams();
+  //const { username } = params;
+  console.log("userName:", props.username);
+  console.log("userid: "+props.userId);
   //---Get user id from username
-  const [ userId, setUserID ] = useState("");
-  console.log("name " + params.username)
+  //const [ userId, setUserID ] = useState("");
+  // setUserID(params.userId)
+  console.log("name " + props.username)
   const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
-  fetch(`${apiURL}translations?username=${params.username}`)
+  fetch(`${apiURL}translations?username=${props.username}`)
     .then(response => response.json())
     .then(results => {
        console.log("results "+results[0].id)
-       setUserID(results[0].id)
+       //setUserID(results[0].id)
     })
     .catch(error => {
     })
@@ -87,7 +90,7 @@ function TranslationView(props) {
     console.log("enteredText", enteredText);
     if(enteredText != "") {
       setText2Translate(enteredText);
-      storeTranslation(userId, enteredText);
+      storeTranslation(props.userId, enteredText);
     }
     document.getElementById('text').value = "";
   }
@@ -109,7 +112,7 @@ function TranslationView(props) {
   )
 
   const GoToProfile=()=>{
-    navigator(`/profile/${params.username}/${userId}`) 
+    navigator(`/profile/${props.username}/${props.userId}`) 
   }
 
   return (
@@ -117,7 +120,7 @@ function TranslationView(props) {
     <div className="main">
     <div className="header">
         <h1>Lost in translation</h1>
-        <h3>Page for {params.username}</h3>
+        <h3>Page for {props.username}</h3>
     </div>
 
     <button className="profile" onClick={GoToProfile} type="button">Go to profile page</button>

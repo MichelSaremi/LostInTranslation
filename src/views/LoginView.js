@@ -4,9 +4,10 @@ import { createRef, useState } from "react";
 import React from "react";
 
 function LoginView() {
+    //const [ userId, setUserID ] = useState("");
     const navigator = useNavigate()
     const input = createRef()
-
+    
     //--- When button is clicked
     const onSubmit = event => {
         const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
@@ -27,9 +28,10 @@ function LoginView() {
                     alert("Welcome back "+ username)
                     //--- get latest translation for this user
                     const translations = results[0].translations;
-                    console.log("translations:", translations);
-                    localStorage.setItem("translations", translations.join(String.fromCharCode(30)));
-                    localStorage.setItem("userId", results[0].id);
+                    // localStorage.setItem("translations", translations.join(String.fromCharCode(30)));
+                    //setUserID(results[0].id);
+                    console.log("results[0].id",results[0].id);
+                    navigator(`/translation/${username}/${results[0].id}`)
                 }
                 else {
                     //---if not create a new profile
@@ -45,10 +47,18 @@ function LoginView() {
                         })
                     })
                     .then(response => {
-                    if (!response.ok) {
-                        throw new Error('Could not create new user')
-                        }
-                        return response.json()
+                        if (!response.ok) {
+                            throw new Error('Could not create new user')
+                            }
+                            return response.json()
+                    })
+                    .then(results => {
+                        //console.log("results[0].id", results[0].id);
+                        const id = results.id;
+                        //const id = 100;
+                        console.log(id);
+                        //setUserID(results[0].id);
+                        navigator(`/translation/${username}/${id}`);
                     })
                     .catch(error => {
                     })
@@ -62,8 +72,8 @@ function LoginView() {
         
         //--Take user to translation view
         console.log("navigating to translation page for user: ", username);
-        localStorage.setItem("userName", username);
-        navigator(`/translation/${username}`)
+        //localStorage.setItem("userName", username);
+        //navigator(`/translation/${username}/${userId}`)
         }
     }
   return (
