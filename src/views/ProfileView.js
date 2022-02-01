@@ -41,18 +41,32 @@ function DeleteTranslations(userId){
 function ProfileView() {
       //---Get user translations from username 
       const [translationlist, setTranslations ] = useState([]);
-      const props = useParams()
+      const params = useParams()
       const navigator = useNavigate()
 
+      /* check whether username matches userID 
+        the user could cheat by visiting the translation url 
+        by directly typing into the browser: 
+        http://gameURL/translations/Username/UserID
+        hence ist must be doublechecked wether username and userID actually
+        builds a match...
+      */
       useEffect(() => {
-        const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
-        fetch(`${apiURL}translations?username=${props.username}`)
-        .then(response => response.json())
-        .then(results => {
-          setTranslations(results[0].translations)
-        })
-        .catch(error => {
-        })
+        //const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
+        // fetch(`${apiURL}translations?username=${props.username}`)
+        // .then(response => response.json())
+        // .then(results => {
+        //   setTranslations(results[0].translations)
+        const translationHistory = localStorage.getItem("translations");
+        if(
+          translationHistory != undefined && 
+          translationHistory != null &&
+          translationHistory != "") {
+          setTranslations(JSON.parse(translationHistory));
+        }
+        // })
+        // .catch(error => {
+        // })
       }, [])
       
       //---only take the 10 latest translations
@@ -64,29 +78,58 @@ function ProfileView() {
       
       //---split translations into seperate lines and list them one at a time
       const lines = ListOf10.map((line, index) => {
-        
         return (
           <div key={index+1}>
             <TranslationList index={index+1} line={line} />
           </div>
         )
       });
+
+      /* handles onClick event on the "Delete your translations" button
+      */
+      const handleDeleteClick = () => {
+        DeleteTranslations(params.userId);
+        setTranslations([])
+        //--- also remove translations from localStorage
+        localStorage.setItem("translations", "");
+      }
+
+      /* handles onClick event on the "LogOut" button
+      */
+      const handleLogOutClick = () => {
+        // DeleteTranslations(params.userId);
+        setTranslations([]);
+        //--- also remove translationHistory from localStorage
+        localStorage.setItem("translations", "");
+        //--- reset username in localStore to signal end of user session
+        localStorage.setItem("userName", "");
+        navigator(`/`);
+      }
+
+      /* handles onClick event on the "LogOut" button
+      */
+      const handleBackClick = () => {
+        navigator(`/translation/${params.username}/${params.userId}`);
+      }
+
+
       //---displaying html
       return (
         <>
         <div className='main'>
-        <div className='header'>
-          <h1>The most recent translations you have done!</h1>
-        </div>
-        <div className='lines'>
-          {lines}
-        </div>
-          <button className='delete' onClick={() => {DeleteTranslations(props.userId);setTranslations([])}} type="button">Delete your translations</button>
-          <button className ='logout' onClick={() => {DeleteTranslations(props.userId);setTranslations([]);navigator(`/`)}} type="button">Logout</button>
-        
-        <div className="footer">
-          <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
-        </div>
+          <div className='header'>
+            <h1>The most recent translations you have done!</h1>
+          </div>
+          <div className='lines'>
+            {lines}
+          </div>
+            <button className='delete' onClick={ handleDeleteClick } type="button">Delete your translations</button>
+            <button className ='logout' onClick={ handleLogOutClick } type="button">Logout</button>
+            <button onClick={ handleBackClick } type="button">Back to translation page</button>
+          
+          <div className="footer">
+            <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
+          </div>
         </div>
         </>
       );
