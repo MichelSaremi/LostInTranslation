@@ -119,14 +119,16 @@ function ProfileView() {
         <div className='main'>
           <div className='header'>
             <h1>The most recent translations you have done!</h1>
+            <h3>Page for {params.username}</h3>
           </div>
           <div className='lines'>
             {lines}
           </div>
+          <div className='buttons'>
             <button className='delete' onClick={ handleDeleteClick } type="button">Delete your translations</button>
             <button className ='logout' onClick={ handleLogOutClick } type="button">Logout</button>
-            <button onClick={ handleBackClick } type="button">Back to translation page</button>
-          
+            <button className='trans' onClick={ handleBackClick } type="button">Back to translation page</button>
+          </div>
           <div className="footer">
             <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
           </div>
