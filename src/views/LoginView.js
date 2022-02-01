@@ -4,11 +4,10 @@ import { createRef, useState } from "react";
 import React from "react";
 
 function LoginView() {
-    //const [ userId, setUserID ] = useState("");
     const navigator = useNavigate()
     const input = createRef()
     
-    //--- When button is clicked
+    //--- When register button is clicked
     const onSubmit = event => {
         const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
         const apiKey = 'hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge'
@@ -71,6 +70,7 @@ function LoginView() {
             })
         }
     }
+    //--- diplaying html
   return (
     <>
     <div className="main">
