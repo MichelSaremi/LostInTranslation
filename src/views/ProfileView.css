@@ -42,11 +42,11 @@ button.logout {
     background: rebeccapurple;
     color:seashell;
     border-radius: 10%;
-    width: 100px;
-    height: 40px;
+    width: 120px;
+    height: 55px;
     text-align: center;
     position: relative;
-    left: 38%;
+    left: 37%;
     opacity: 0.9;
 }
 button.trans {
@@ -54,15 +54,15 @@ button.trans {
     color:seashell;
     border-radius: 10%;
     width: 120px;
-    height: 50px;
-    text-align: center;
+    height: 55px;
     position: relative;
-    left: 15%;
+    left: 37%;
+    text-align: center;
     opacity: 0.9;
 }
 div.buttons{
     position: relative;
-    left: 10%;
+    left: 2%;
 } 
 div.footer {
     position:absolute;
