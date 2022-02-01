@@ -6,7 +6,7 @@ import CheckUser from "../components/CheckUser";
 import { useNavigate } from "react-router-dom";
 
 //---Deleting translations from API
-function DeleteTranslations(userId){
+const DeleteTranslations = (userId) =>{
 
     let url = "https://ms-oh-trivia-api.herokuapp.com/";
     const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
@@ -30,33 +30,17 @@ function DeleteTranslations(userId){
       }
       return response.json();
     })
-    .then(updatedUser => {
-      // updatedUser is the user with the Patched data
-      console.log("updatedUser",updatedUser);
-    })
     .catch(error => {
     })
 }
 
 function ProfileView() {
-      //---Get user translations from username 
+      //---Get user translations
       const [translationlist, setTranslations ] = useState([]);
       const params = useParams()
       const navigator = useNavigate()
 
-      /* check whether username matches userID 
-        the user could cheat by visiting the translation url 
-        by directly typing into the browser: 
-        http://gameURL/translations/Username/UserID
-        hence ist must be doublechecked wether username and userID actually
-        builds a match...
-      */
       useEffect(() => {
-        //const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
-        // fetch(`${apiURL}translations?username=${props.username}`)
-        // .then(response => response.json())
-        // .then(results => {
-        //   setTranslations(results[0].translations)
         const translationHistory = localStorage.getItem("translations");
         if(
           translationHistory != undefined && 
@@ -64,9 +48,6 @@ function ProfileView() {
           translationHistory != "") {
           setTranslations(JSON.parse(translationHistory));
         }
-        // })
-        // .catch(error => {
-        // })
       }, [])
       
       //---only take the 10 latest translations
@@ -97,7 +78,7 @@ function ProfileView() {
       /* handles onClick event on the "LogOut" button
       */
       const handleLogOutClick = () => {
-        // DeleteTranslations(params.userId);
+        //--- Deleting from the useState
         setTranslations([]);
         //--- also remove translationHistory from localStorage
         localStorage.setItem("translations", "");
@@ -106,7 +87,7 @@ function ProfileView() {
         navigator(`/`);
       }
 
-      /* handles onClick event on the "LogOut" button
+      /* handles onClick event on the "Back to translation page" button
       */
       const handleBackClick = () => {
         navigator(`/translation/${params.username}/${params.userId}`);
