@@ -29,12 +29,10 @@ function LoginView() {
                     alert("Welcome back "+ username)
                     //--- get latest translation for this user
                     const translations = results[0].translations;
-                    console.log("translations: ", translations);
                     localStorage.setItem("translations", JSON.stringify(translations));
                     userId = results[0].id;
                     //--Take user to translation view
                     const translationUrl = `/translation/${username}/${userId}`;
-                    console.log("translationUrl:", translationUrl)
                     navigator(translationUrl);
                 }
                 else {

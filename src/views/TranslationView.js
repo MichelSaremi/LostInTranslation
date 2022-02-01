@@ -14,6 +14,7 @@ const alphabet = "abcdefghijklmnopqrstuvwxyz"
 */
 const storeTranslation = (userId, newTranslation) => {
   const translationHistoryValue = localStorage.getItem("translations");
+  //---stores an array with translation history
   let translationHistory = [];
   if(
     translationHistoryValue != undefined && 
@@ -26,18 +27,15 @@ const storeTranslation = (userId, newTranslation) => {
   let url = "https://ms-oh-trivia-api.herokuapp.com/";
   const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
   url += `translations/${userId}`;
-  console.log("userId:", userId);
-  console.log("newTranslation:", newTranslation);
-  console.log("translationHistory:", translationHistory);
-  console.log("url:", url);
+
   fetch(url, {
-    method: 'PATCH', // NB: Set method to PATCH
+    method: 'PATCH', 
     headers: {
       'X-API-Key': key,
       'Content-Type': 'application/json'
     },
     body: JSON.stringify({
-        // Provide new translations to add to user with userId
+        //--- Translations history is added to API object for user with userId
         translations: translationHistory 
     })
   })
@@ -47,20 +45,17 @@ const storeTranslation = (userId, newTranslation) => {
     }
     return response.json();
   })
-  .then(updatedUser => {
-    // updatedUser is the user with the Patched data
-    console.log("updatedUser",updatedUser);
-  })
   .catch(error => {
   })
 }
 
 let enteredText = "";
 
+//---translationsview component
 function TranslationView() {
   
   const navigator = useNavigate()
-  const props = useParams();
+  const params = useParams();
   const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'  
   
 
@@ -68,9 +63,7 @@ function TranslationView() {
 
   /* function to store the entered text in variable "text2Translate" */
   const onTextChanged = (event) => {
-    console.log(event.target.value);
     enteredText = event.target.value;
-    //setText2Translate(event.target.value);
   }
   
   /*  function when the user clicked on the "Translate* button 
@@ -81,18 +74,18 @@ function TranslationView() {
       Finally it stores the translation text into JSON DB via HTTP PATCH request
   */
   const OnTranslateClicked = (event) => {
-    console.log("Translate was clicked");
-    console.log("enteredText", enteredText);
     if(enteredText != "") {
       setText2Translate(enteredText);
-      storeTranslation(props.userId, enteredText);
+      storeTranslation(params.userId, enteredText);
     }
     document.getElementById('text').value = "";
   }
 
+  /* This function creates a component that displays the translated sign-language at {translated}.
+    iterates though the text2Translate string and finds the respective png image per letter
+  */
   const translated = text2Translate.split("").map(
     (char, index) => {
-      console.log("setting translated...");
       if(alphabet.indexOf(char.toLowerCase()) > -1) {
         return (
           <img key={index} src={`${imgPath}${char.toLowerCase()}.png`} style={ { width: "50px" } } />
@@ -105,17 +98,18 @@ function TranslationView() {
       }
     }
   )
-
+  
+  //---navigator that takes user to profile view
   const GoToProfile=()=>{
-    navigator(`/profile/${props.username}/${props.userId}`) 
+    navigator(`/profile/${params.username}/${params.userId}`) 
   }
-
+  //---displaying html
   return (
    <>
     <div className="main">
     <div className="header">
         <h1>Lost in translation</h1>
-        <h3>Page for {props.username}</h3>
+        <h3>Page for {params.username}</h3>
     </div>
   
     <div className="console">   
