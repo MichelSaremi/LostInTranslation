@@ -4,11 +4,10 @@ import { createRef, useState } from "react";
 import React from "react";
 
 function LoginView() {
-    //const [ userId, setUserID ] = useState("");
     const navigator = useNavigate()
     const input = createRef()
     
-    //--- When button is clicked
+    //--- When register button is clicked
     const onSubmit = event => {
         const apiURL = 'https://ms-oh-trivia-api.herokuapp.com/'
         const apiKey = 'hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge'
@@ -31,10 +30,11 @@ function LoginView() {
                     // localStorage.setItem("translations", translations.join(String.fromCharCode(30)));
                     //setUserID(results[0].id);
                     console.log("results[0].id",results[0].id);
+                    //--- navigate to translation view
                     navigator(`/translation/${username}/${results[0].id}`)
                 }
                 else {
-                    //---if not create a new profile
+                    //---if user does not create a new profile
                     fetch(`${apiURL}translations`, {
                         method: 'POST',
                         headers: {
@@ -53,31 +53,21 @@ function LoginView() {
                             return response.json()
                     })
                     .then(results => {
-                        //console.log("results[0].id", results[0].id);
                         const id = results.id;
-                        //const id = 100;
-                        console.log(id);
-                        //setUserID(results[0].id);
                         navigator(`/translation/${username}/${id}`);
                     })
                     .catch(error => {
                     })
                 }
-                console.log("username:", username);
-                console.log("localStorage.getItem(userName): ", localStorage.getItem("userName"));
-            // results will be an array of users that match the username of victor.
             })
             .catch(error => {
             })
-        
-        //--Take user to translation view
-        console.log("navigating to translation page for user: ", username);
-        //localStorage.setItem("userName", username);
-        //navigator(`/translation/${username}/${userId}`)
+
         }
     }
   return (
     <>
+    //--- diplaying html
     <div className="main">
 
     <div className="header">

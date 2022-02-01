@@ -44,14 +44,16 @@ button.translate {
 button.profile {
     background: rebeccapurple;
     color:seashell;
-    border-radius: 40%;
-    width: 400px;
+    border-radius: 10%;
+    width: 200px;
     height: 60px;
     text-align: center;
     position: relative;
     left: 37%;
     opacity: 0.9;
-
+}
+div.console {
+    position: relative;
 }
 div.footer {
     position:absolute;

@@ -5,21 +5,22 @@ import { useState , useEffect} from 'react';
 import CheckUser from "../components/CheckUser";
 import { useNavigate } from "react-router-dom";
 
-//---Delete your translations from API
+//---Deleting translations from API
 function DeleteTranslations(userId){
 
     let url = "https://ms-oh-trivia-api.herokuapp.com/";
     const key = "hezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge67zshhezgdhzet5jkiuztge";
     url += `translations/${userId}`;
-  
+
+    //---Fething user
     fetch(url, {
-      method: 'PATCH', // NB: Set method to PATCH
+      method: 'PATCH', 
       headers: {
         'X-API-Key': key,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify({
-          // Provide new translations to add to user with userId
+          //---resetting translations
           translations: [] 
       })
     })
@@ -70,7 +71,7 @@ function ProfileView() {
           </div>
         )
       });
-
+      //---displaying html
       return (
         <div className='main'>
         <div className='header'>
