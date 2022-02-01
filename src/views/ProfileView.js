@@ -73,6 +73,7 @@ function ProfileView() {
       });
       //---displaying html
       return (
+        <>
         <div className='main'>
         <div className='header'>
           <h1>The most recent translations you have done!</h1>
@@ -87,6 +88,7 @@ function ProfileView() {
           <h4 className='authors'>Made by Oliver Hauck and Michel Saremi</h4>
         </div>
         </div>
+        </>
       );
 };
 
